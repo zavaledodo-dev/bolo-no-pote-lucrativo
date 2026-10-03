@@ -188,10 +188,10 @@ function Quiz() {
                 />
               </div>
               <h2 className="mt-6 font-display text-2xl leading-snug font-bold text-foreground">
-                {quizQuestions[step].question}
+                {quizQuestions[step]!.question}
               </h2>
               <div className="mt-6 flex flex-col gap-3">
-                {quizQuestions[step].options.map((option) => (
+                {quizQuestions[step]!.options.map((option) => (
                   <button
                     key={option}
                     type="button"
