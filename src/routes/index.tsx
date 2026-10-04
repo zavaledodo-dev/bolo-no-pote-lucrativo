@@ -383,10 +383,10 @@ function Offer() {
           </h2>
           <div className="mt-5 flex items-end justify-center gap-3 lg:justify-start">
             <span className="pb-2 text-lg font-semibold text-muted-foreground line-through">
-              197MT
+              397MT
             </span>
             <span className="font-display text-6xl leading-none font-bold text-gradient-gold sm:text-7xl">
-              97MT
+              199MT
             </span>
           </div>
           <p className="mt-2 text-sm font-semibold text-muted-foreground">
@@ -425,13 +425,13 @@ function Urgency() {
       <div className="mx-auto max-w-4xl rounded-3xl border border-gold/40 bg-gradient-rose-gold px-6 py-8 text-center">
         <Clock className="mx-auto size-7 text-pink-deep" />
         <p className="mx-auto mt-3 max-w-xl font-display text-xl leading-snug font-bold text-pink-deep sm:text-2xl">
-          O preço de 97MT é apenas para as primeiras compradoras. Depois volta para 197MT.
+          O preço de 199MT é apenas para as primeiras compradoras. Depois volta para 397MT.
         </p>
         <a
           href={CHECKOUT_URL}
           className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-pink-deep shadow-rose transition hover:bg-cream"
         >
-          Garantir o meu ebook por 97MT
+          Garantir o meu ebook por 199MT
         </a>
       </div>
     </section>
