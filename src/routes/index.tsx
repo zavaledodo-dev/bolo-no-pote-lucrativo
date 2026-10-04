@@ -21,6 +21,7 @@ import depoimento1 from "@/assets/depoimento1.jpg";
 import depoimento2 from "@/assets/depoimento2.jpg";
 import depoimento3 from "@/assets/depoimento3.jpg";
 import depoimento4 from "@/assets/depoimento4.jpg";
+import seloGarantia from "@/assets/selo-garantia.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -160,10 +161,16 @@ function Hero({ isRevealed }: { isRevealed: boolean }) {
         }`}
       >
         <div className={isRevealed ? "text-center lg:text-left" : "text-center"}>
-          <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-cream px-4 py-1.5 text-xs font-bold tracking-wide text-gold-deep uppercase">
-            <Sparkles className="size-3.5" />
-            Ebook + passo a passo de vendas
-          </span>
+          <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-cream px-4 py-1.5 text-xs font-bold tracking-wide text-gold-deep uppercase">
+              <Sparkles className="size-3.5" />
+              Ebook + passo a passo de vendas
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-white px-3.5 py-1 text-xs font-bold text-foreground shadow-gold-soft ring-1 ring-gold/30">
+              <img src={seloGarantia} alt="Selo 7 Dias de Garantia" className="h-6 w-auto object-contain rounded-full" />
+              7 Dias de Garantia
+            </span>
+          </div>
           <h1 className="mt-5 font-display text-4xl leading-tight font-bold text-foreground sm:text-5xl lg:text-[3.4rem]">
             Aprenda a fazer bolo no pote e{" "}
             <span className="text-gradient-gold">gere a sua própria renda</span>, em Moçambique.
@@ -480,9 +487,12 @@ function Offer() {
               Falar com a Confeiteira Elisa no WhatsApp
             </a>
           </div>
-          <div className="mt-5 flex items-center justify-center gap-2 text-xs font-semibold text-muted-foreground lg:justify-start">
-            <ShieldCheck className="size-4 text-whatsapp" />
-            Compra segura · Entrega imediata após o pagamento
+          <div className="mt-5 flex items-center justify-center gap-3 text-xs font-semibold text-muted-foreground lg:justify-start">
+            <img src={seloGarantia} alt="Selo 7 Dias de Garantia" className="h-10 w-auto object-contain rounded-full shadow-sm" />
+            <div>
+              <p className="font-bold text-foreground">Garantia Incondicional de 7 Dias</p>
+              <p className="text-[11px] text-muted-foreground">Compra 100% segura · Satisfação garantida ou seu dinheiro de volta</p>
+            </div>
           </div>
         </div>
       </div>
