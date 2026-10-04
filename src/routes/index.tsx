@@ -12,10 +12,15 @@ import {
   Play,
   ShieldCheck,
   Sparkles,
+  Star,
   Wallet,
 } from "lucide-react";
 import heroImage from "@/assets/hero-bolo-pote.jpg";
 import ebookMockup from "@/assets/ebook-mockup.png";
+import depoimento1 from "@/assets/depoimento1.jpg";
+import depoimento2 from "@/assets/depoimento2.jpg";
+import depoimento3 from "@/assets/depoimento3.jpg";
+import depoimento4 from "@/assets/depoimento4.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,10 +47,6 @@ export const Route = createFileRoute("/")({
 const WHATSAPP_URL = "https://wa.me/258850289394";
 const CHECKOUT_URL = "https://checkout.escalepay.com/9498618";
 
-// Cole aqui o link do seu vídeo VSL (ex.: "https://www.youtube.com/embed/XXXX").
-// Enquanto estiver vazio, a página mostra um espaço elegante de vídeo.
-const VSL_VIDEO_URL = "";
-
 const quizQuestions = [
   {
     question: "Você quer vender o bolo no pote ou fazer só para a família?",
@@ -65,6 +66,37 @@ const quizQuestions = [
   },
 ];
 
+const testimonials = [
+  {
+    image: depoimento1,
+    name: "Amina S.",
+    location: "Maputo",
+    badge: "15 potes vendidos no 1º dia",
+    text: "Preparei a minha primeira grande encomenda da semana! 15 potes de chocolate com morango e creme. Vendi tudo no meu bairro em menos de 2 horas. Muito obrigada Elisa, o método de cálculo e as receitas funcionam mesmo!",
+  },
+  {
+    image: depoimento2,
+    name: "Délcia M.",
+    location: "Matola",
+    badge: "Criou a própria marca de doces",
+    text: "Criei a minha própria marca de doces no pote em casa depois de estudar o ebook! Já tenho clientes fixas e faço entregas todos os dias pelo WhatsApp. Ter a minha renda própria não tem preço!",
+  },
+  {
+    image: depoimento3,
+    name: "Nelsa T.",
+    location: "Beira",
+    badge: "Geleira cheia de entregas",
+    text: "Sempre quis ter o meu próprio negócio de doces mas não sabia por onde começar. Com as receitas do ebook e as dicas de embalagem bonita, os potes saem como água! Olhem a minha geleira hoje!",
+  },
+  {
+    image: depoimento4,
+    name: "Joana C.",
+    location: "Nampula",
+    badge: "Fornece para festas e escritórios",
+    text: "Comecei pequena com apenas 500MT de material. Hoje forneço potes de bolo para festas, escritórios e revendedores! A minha geleira fica assim lotada todos os fins de semana. Gratidão Elisa!",
+  },
+];
+
 function BrandMark() {
   return (
     <a href="#topo" className="flex items-center gap-2.5">
@@ -78,29 +110,33 @@ function BrandMark() {
   );
 }
 
-function Header() {
+function Header({ isRevealed }: { isRevealed: boolean }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <BrandMark />
-        <a
-          href="#oferta"
-          className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-rose transition hover:bg-pink-deep sm:inline-flex"
-        >
-          Quero o ebook
-        </a>
-        <a
-          href="#oferta"
-          className="inline-flex rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground shadow-rose sm:hidden"
-        >
-          Quero o ebook
-        </a>
+        {isRevealed && (
+          <>
+            <a
+              href="#oferta"
+              className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-rose transition hover:bg-pink-deep sm:inline-flex animate-in fade-in"
+            >
+              Quero o ebook
+            </a>
+            <a
+              href="#oferta"
+              className="inline-flex rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground shadow-rose sm:hidden animate-in fade-in"
+            >
+              Quero o ebook
+            </a>
+          </>
+        )}
       </div>
     </header>
   );
 }
 
-function Hero() {
+function Hero({ isRevealed }: { isRevealed: boolean }) {
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://app.vsltub.com/player.js";
@@ -118,8 +154,12 @@ function Hero() {
     <section id="topo" className="relative overflow-hidden">
       <div className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-pink-soft/50 blur-3xl" />
       <div className="pointer-events-none absolute top-40 -left-24 size-64 rounded-full bg-gold-soft/40 blur-3xl" />
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pt-10 pb-14 sm:px-6 sm:pt-14 lg:grid-cols-2 lg:gap-8">
-        <div className="text-center lg:text-left">
+      <div
+        className={`mx-auto grid max-w-6xl items-center gap-10 px-4 pt-8 pb-10 sm:px-6 sm:pt-12 ${
+          isRevealed ? "lg:grid-cols-2 lg:gap-8" : "max-w-3xl text-center"
+        }`}
+      >
+        <div className={isRevealed ? "text-center lg:text-left" : "text-center"}>
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-cream px-4 py-1.5 text-xs font-bold tracking-wide text-gold-deep uppercase">
             <Sparkles className="size-3.5" />
             Ebook + passo a passo de vendas
@@ -130,46 +170,60 @@ function Hero() {
           </h1>
           <div
             id="vslturb-player"
-            className="vslturb-player mt-6 overflow-hidden rounded-2xl"
-            data-config='{"videoId":"MI9-8i4Mw6k","behavior":{"allowPlayPause":true,"autoplay":false,"customThumbnail":"","showProgressBar":true,"progressBarSpeed":4,"showVolumeControl":true,"allowFullscreen":false,"showTimeline":false,"showPlayButton":true,"showSmallPlayButton":true,"showBigPlayButton":true,"silentAutoplay":true},"texts":{"endTitle":"Parabéns🥳 por assistir até aqui após o pagamento receberás um ebook bônus no seu watsap !","endMessage":"Assistir novamente","initialText":"Clique para ouvir","externalLink":"https://checkout.escalepay.com/9498618","initialTitle":"Seu vídeo já começou","pauseMessage":"Você já começou a assistir esse vídeo","restartLabel":"Assistir do início?","continueLabel":"Continuar assistindo?","externalLinkText":"Visitar site"},"colors":{"textColor":"#ffffff","endOverlay":"#b72c33","progressBar":"#db3434","pauseOverlay":"#b72c33","controlsColor":"#ffffff","initialButton":"#db3434c4","endButtonColor":"#d11515","pauseTextColor":"#ffffff","buttonBorderColor":"#ffffff","endButtonTextColor":"#000000"},"fonts":{"textSize":"14","titleSize":"18","fontFamily":"Roboto, sans-serif","initialIconType":"muted"},"features":{"showEndButton":true,"showEndScreen":true,"showPauseScreen":true,"buttonBorderWidth":0,"pauseBackgroundImage":"","endScreenBackgroundImage":""},"idvideo":"vbUzVQrV6"}'
+            className="vslturb-player mt-6 overflow-hidden rounded-2xl shadow-rose ring-1 ring-border"
+            data-config='{"videoId":"MI9-8i4Mw6k","behavior":{"allowPlayPause":true,"autoplay":false,"customThumbnail":"","showProgressBar":true,"progressBarSpeed":4,"showVolumeControl":true,"allowFullscreen":false,"showTimeline":false,"showPlayButton":true,"showSmallPlayButton":true,"showBigPlayButton":true,"silentAutoplay":true},"texts":{"endTitle":"Parabéns🥳 por assistir até aqui após o pagamento receberás um ebook bónus no seu watsap !","endMessage":"Assistir novamente","initialText":"Clique para ouvir","externalLink":"https://checkout.escalepay.com/9498618","initialTitle":"Seu vídeo já começou","pauseMessage":"Você já começou a assistir esse vídeo","restartLabel":"Assistir do início?","continueLabel":"Continuar assistindo?","externalLinkText":"Visitar site"},"colors":{"textColor":"#ffffff","endOverlay":"#b72c33","progressBar":"#db3434","pauseOverlay":"#b72c33","controlsColor":"#ffffff","initialButton":"#db3434c4","endButtonColor":"#d11515","pauseTextColor":"#ffffff","buttonBorderColor":"#ffffff","endButtonTextColor":"#000000"},"fonts":{"textSize":"14","titleSize":"18","fontFamily":"Roboto, sans-serif","initialIconType":"muted"},"features":{"showEndButton":true,"showEndScreen":true,"showPauseScreen":true,"buttonBorderWidth":0,"pauseBackgroundImage":"","endScreenBackgroundImage":""},"idvideo":"vbUzVQrV6"}'
             data-idvideo="vbUzVQrV6"
           />
-          <p className="mx-auto mt-5 max-w-md text-base text-muted-foreground sm:text-lg lg:mx-0">
-            Receitas testadas, embalagem bonita e o cálculo do preço certo — tudo num só ebook,
-            feito para mulheres que querem começar com pouco.
-          </p>
-          <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
-            <a
-              href="#quiz"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-cta px-7 py-3.5 text-base font-bold text-white shadow-rose transition hover:brightness-105 sm:w-auto"
-            >
-              Fazer o teste rápido
-            </a>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-whatsapp/40 px-7 py-3.5 text-base font-bold text-whatsapp-deep transition hover:bg-whatsapp/10 sm:w-auto"
-            >
-              <MessageCircle className="size-5" />
-              Falar no WhatsApp
-            </a>
-          </div>
+
+          {!isRevealed && (
+            <p className="mt-5 text-center text-sm font-bold text-pink-deep animate-pulse">
+              Assista ao vídeo até ao fim para ver a oferta
+            </p>
+          )}
+
+          {isRevealed && (
+            <div className="animate-in fade-in duration-1000">
+              <p className="mx-auto mt-5 max-w-md text-base text-muted-foreground sm:text-lg lg:mx-0">
+                Receitas testadas, embalagem bonita e o cálculo do preço certo — tudo num só ebook,
+                feito para mulheres que querem começar com pouco.
+              </p>
+              <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
+                <a
+                  href="#quiz"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-cta px-7 py-3.5 text-base font-bold text-white shadow-rose transition hover:brightness-105 sm:w-auto"
+                >
+                  Fazer o teste rápido
+                </a>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-whatsapp/40 px-7 py-3.5 text-base font-bold text-whatsapp-deep transition hover:bg-whatsapp/10 sm:w-auto"
+                >
+                  <MessageCircle className="size-5" />
+                  Falar no WhatsApp
+                </a>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-          <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-rose-gold opacity-60 blur-xl" />
-          <img
-            src={heroImage}
-            alt="Bolo no pote em camadas, servido num pote de vidro com morango"
-            width={1216}
-            height={864}
-            className="relative w-full rounded-[2rem] object-cover shadow-rose ring-1 ring-white/60"
-          />
-          <div className="absolute -bottom-4 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-foreground shadow-gold-soft ring-1 ring-border">
-            <Heart className="size-4 fill-primary text-primary" />
-            Feito para confeiteiras de Moçambique
+
+        {isRevealed && (
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none animate-in fade-in duration-1000">
+            <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-rose-gold opacity-60 blur-xl" />
+            <img
+              src={heroImage}
+              alt="Bolo no pote em camadas, servido num pote de vidro com morango"
+              width={1216}
+              height={864}
+              className="relative w-full rounded-[2rem] object-cover shadow-rose ring-1 ring-white/60"
+            />
+            <div className="absolute -bottom-4 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-foreground shadow-gold-soft ring-1 ring-border">
+              <Heart className="size-4 fill-primary text-primary" />
+              Feito para confeiteiras de Moçambique
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
@@ -238,11 +292,11 @@ function Quiz() {
                 Assista ao vídeo abaixo e veja como começar ainda esta semana.
               </p>
               <a
-                href="#video"
+                href="#oferta"
                 className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-cta px-7 py-3.5 text-base font-bold text-white shadow-rose transition hover:brightness-105"
               >
                 <Play className="size-5 fill-white" />
-                Ver o vídeo agora
+                Ver a oferta agora
               </a>
               <button
                 type="button"
@@ -254,46 +308,6 @@ function Quiz() {
               >
                 Responder novamente
               </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function VideoSection() {
-  return (
-    <section id="video" className="scroll-mt-20 px-4 py-14 sm:px-6">
-      <div className="mx-auto max-w-3xl text-center">
-        <span className="text-xs font-bold tracking-widest text-pink-deep uppercase">
-          Assista com calma
-        </span>
-        <h2 className="mt-3 font-display text-3xl leading-tight font-bold text-foreground sm:text-4xl">
-          Veja como começar o seu negócio de bolo no pote.
-        </h2>
-        <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
-          São poucos minutos que podem mudar a sua renda neste mês.
-        </p>
-        <div className="mt-8 overflow-hidden rounded-3xl border-2 border-gold/40 bg-cream shadow-gold-soft">
-          {VSL_VIDEO_URL ? (
-            <div className="aspect-video w-full">
-              <iframe
-                src={VSL_VIDEO_URL}
-                title="Veja como começar o seu negócio de bolo no pote"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="h-full w-full"
-              />
-            </div>
-          ) : (
-            <div className="flex aspect-video w-full flex-col items-center justify-center gap-4 bg-gradient-rose-gold px-6">
-              <span className="flex size-20 items-center justify-center rounded-full bg-white/90 text-primary shadow-rose animate-pulse-ring">
-                <Play className="size-9 fill-primary" />
-              </span>
-              <p className="max-w-xs text-sm font-semibold text-pink-deep sm:text-base">
-                O vídeo de apresentação será reproduzido aqui
-              </p>
             </div>
           )}
         </div>
@@ -349,6 +363,63 @@ function Benefits() {
               <div>
                 <h3 className="font-display text-lg font-bold text-foreground">{benefit.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{benefit.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section className="bg-background px-4 py-14 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-cream px-4 py-1.5 text-xs font-bold tracking-wide text-gold-deep uppercase">
+            <Sparkles className="size-3.5" />
+            Depoimentos Reais
+          </span>
+          <h2 className="mt-3 font-display text-3xl leading-tight font-bold text-foreground sm:text-4xl">
+            Fotos enviadas pelas nossas alunas em Moçambique
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+            Veja o orgulho e o sucesso das mulheres que começaram do zero com o nosso ebook.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {testimonials.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-rose transition hover:shadow-gold-soft"
+            >
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream-deep">
+                <img
+                  src={item.image}
+                  alt={`Potes de bolo de ${item.name}`}
+                  className="h-full w-full object-cover transition duration-300 hover:scale-105"
+                  loading="lazy"
+                />
+                <span className="absolute top-3 left-3 rounded-full bg-primary/90 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow-rose">
+                  {item.badge}
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <div className="flex items-center gap-1 text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="size-4 fill-gold text-gold" />
+                    ))}
+                  </div>
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground italic">
+                    "{item.text}"
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-border/50">
+                  <h4 className="font-display text-sm font-bold text-foreground">{item.name}</h4>
+                  <p className="text-[11px] font-medium text-pink-deep">{item.location}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -467,18 +538,100 @@ function Footer() {
 }
 
 function Index() {
+  const [isRevealed, setIsRevealed] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("vsl_pitch_revealed") === "true";
+    }
+    return false;
+  });
+
+  const triggerReveal = () => {
+    setIsRevealed(true);
+    try {
+      localStorage.setItem("vsl_pitch_revealed", "true");
+    } catch (e) {
+      console.error(e);
+    }
+    setTimeout(() => {
+      const offerElement = document.getElementById("oferta");
+      if (offerElement) {
+        offerElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300);
+  };
+
+  useEffect(() => {
+    if (isRevealed) return;
+
+    // Timer de fallback: 180 segundos (3 minutos)
+    const FALLBACK_DELAY_MS = 180 * 1000;
+    const timer = setTimeout(() => {
+      triggerReveal();
+    }, FALLBACK_DELAY_MS);
+
+    // Eventos do player vslTub e postMessage
+    const handleMessage = (event: MessageEvent) => {
+      if (!event.data) return;
+      const dataStr = typeof event.data === "string" ? event.data : JSON.stringify(event.data);
+      if (
+        dataStr.includes("ended") ||
+        dataStr.includes("finish") ||
+        dataStr.includes("completed") ||
+        dataStr.includes("vslTubEnded") ||
+        dataStr.includes("pitch_reveal")
+      ) {
+        triggerReveal();
+      }
+    };
+
+    const handleCustomEvent = () => {
+      triggerReveal();
+    };
+
+    window.addEventListener("message", handleMessage);
+    window.addEventListener("vslTubEnded", handleCustomEvent);
+    window.addEventListener("videoEnded", handleCustomEvent);
+    window.addEventListener("ended", handleCustomEvent);
+
+    // Polling do player vslTub para elementos <video>
+    const interval = setInterval(() => {
+      const playerContainer = document.getElementById("vslturb-player");
+      if (playerContainer) {
+        const video = playerContainer.querySelector("video");
+        if (video) {
+          if (video.ended || (video.duration > 0 && video.currentTime >= video.duration - 1)) {
+            triggerReveal();
+          }
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+      window.removeEventListener("message", handleMessage);
+      window.removeEventListener("vslTubEnded", handleCustomEvent);
+      window.removeEventListener("videoEnded", handleCustomEvent);
+      window.removeEventListener("ended", handleCustomEvent);
+    };
+  }, [isRevealed]);
+
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header isRevealed={isRevealed} />
       <main>
-        <Hero />
-        <Quiz />
-        <VideoSection />
-        <Benefits />
-        <Offer />
-        <Urgency />
+        <Hero isRevealed={isRevealed} />
+        {isRevealed && (
+          <div className="animate-in fade-in duration-1000">
+            <Quiz />
+            <Benefits />
+            <Testimonials />
+            <Offer />
+            <Urgency />
+          </div>
+        )}
       </main>
-      <Footer />
+      {isRevealed && <Footer />}
     </div>
   );
 }
