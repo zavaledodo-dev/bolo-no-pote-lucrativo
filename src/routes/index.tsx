@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BookOpenCheck,
   Calculator,
@@ -101,6 +101,19 @@ function Header() {
 }
 
 function Hero() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://app.vsltub.com/player.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <section id="topo" className="relative overflow-hidden">
       <div className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-pink-soft/50 blur-3xl" />
@@ -115,6 +128,12 @@ function Hero() {
             Aprenda a fazer bolo no pote e{" "}
             <span className="text-gradient-gold">gere a sua própria renda</span>, em Moçambique.
           </h1>
+          <div
+            id="vslturb-player"
+            className="vslturb-player mt-6 overflow-hidden rounded-2xl"
+            data-config='{"videoId":"MI9-8i4Mw6k","behavior":{"allowPlayPause":true,"autoplay":false,"customThumbnail":"","showProgressBar":true,"progressBarSpeed":4,"showVolumeControl":true,"allowFullscreen":false,"showTimeline":false,"showPlayButton":true,"showSmallPlayButton":true,"showBigPlayButton":true,"silentAutoplay":false},"texts":{"endTitle":"Parabéns🥳 por assistir até aqui! Após o pagamento, receberás um ebook bónus no teu WhatsApp!","endMessage":"Assistir novamente","initialText":"Clique para ouvir","externalLink":"https://checkout.escalepay.com/9498618","initialTitle":"Seu vídeo já começou","pauseMessage":"Você já começou a assistir esse vídeo","restartLabel":"Assistir do início?","continueLabel":"Continuar assistindo?","externalLinkText":"Visitar site"},"colors":{"textColor":"#ffffff","endOverlay":"#b72c33","progressBar":"#db3434","pauseOverlay":"#b72c33","controlsColor":"#ffffff","initialButton":"#db3434c4","endButtonColor":"#ffffff","pauseTextColor":"#ffffff","buttonBorderColor":"#ffffff","endButtonTextColor":"#000000"},"fonts":{"textSize":"14","titleSize":"18","fontFamily":"Roboto, sans-serif","initialIconType":"muted"},"features":{"showEndButton":true,"showEndScreen":true,"showPauseScreen":true,"buttonBorderWidth":0,"pauseBackgroundImage":"","endScreenBackgroundImage":""},"idvideo":"QudLtMdYU"}'
+            data-idvideo="QudLtMdYU"
+          />
           <p className="mx-auto mt-5 max-w-md text-base text-muted-foreground sm:text-lg lg:mx-0">
             Receitas testadas, embalagem bonita e o cálculo do preço certo — tudo num só ebook,
             feito para mulheres que querem começar com pouco.
