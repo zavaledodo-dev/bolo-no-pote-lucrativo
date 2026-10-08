@@ -112,6 +112,7 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* META PIXEL: o Pixel é carregado automaticamente ao definir META_PIXEL_ID em src/routes/index.tsx */}
       </head>
       <body>
         {children}
