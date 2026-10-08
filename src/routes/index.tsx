@@ -37,7 +37,7 @@ const INCOME_RANGES = ["Até 5.000 MT", "5.000 a 15.000 MT", "Mais de 15.000 MT"
 
 // Vídeo: deixe VIDEO_URL vazio para usar o player VSLTub abaixo.
 // Ou cole um link do YouTube (ex: https://youtu.be/XXXX) — carrega só ao tocar.
-const VIDEO_URL = "";
+const VIDEO_URL: string = "";
 const VSL_ID = "vbUzVQrV6";
 const VSL_CONFIG =
   '{"videoId":"MI9-8i4Mw6k","behavior":{"allowPlayPause":true,"autoplay":false,"customThumbnail":"","showProgressBar":true,"progressBarSpeed":4,"showVolumeControl":true,"allowFullscreen":false,"showTimeline":false,"showPlayButton":true,"showSmallPlayButton":true,"showBigPlayButton":true,"silentAutoplay":true},"texts":{"endTitle":"Parabéns🥳 por assistir até aqui após o pagamento receberás um ebook bónus no seu watsap !","endMessage":"Assistir novamente","initialText":"Clique para ouvir","externalLink":"https://checkout.escalepay.com/9498618","initialTitle":"Seu vídeo já começou","pauseMessage":"Você já começou a assistir esse vídeo","restartLabel":"Assistir do início?","continueLabel":"Continuar assistindo?","externalLinkText":"Visitar site"},"colors":{"textColor":"#ffffff","endOverlay":"#b72c33","progressBar":"#db3434","pauseOverlay":"#b72c33","controlsColor":"#ffffff","initialButton":"#db3434c4","endButtonColor":"#d11515","pauseTextColor":"#ffffff","buttonBorderColor":"#ffffff","endButtonTextColor":"#000000"},"fonts":{"textSize":"14","titleSize":"18","fontFamily":"Roboto, sans-serif","initialIconType":"muted"},"features":{"showEndButton":true,"showEndScreen":true,"showPauseScreen":true,"buttonBorderWidth":0,"pauseBackgroundImage":"","endScreenBackgroundImage":""},"idvideo":"vbUzVQrV6"}';
